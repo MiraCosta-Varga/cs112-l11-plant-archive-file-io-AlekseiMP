@@ -14,10 +14,28 @@ public class Main
 
 
 		//TODO: Step 2 - Declare + initialize variables for file input here
-
+		Scanner inputFile = null;
+		ArrayList<Plant> myPlants = new ArrayList<Plant>();
+		
+		try {
+			inputFile = new Scanner(new FileInputStream("Forage.csv"));
+		} catch (FileNotFoundException fnfe) {
+			System.out.println("ERROR: Cannot open Forage.csv for input");
+			System.exit(0);
+		}
+		
 		
 		//TODO: Step 2 - Connect input stream to file (dont forget the try/catch!)
+		while (inputFile.hasNextLine()) {
+			//System.out.println(inputFile.nextLine());
+			String currentLine = inputFile.nextLine();
+			Plant currentPlant = new Plant(currentLine);
+			myPlants.add(currentPlant);
 
+			System.out.println("*** Added new plant with following info: " + currentPlant.getName());
+		}
+		
+		System.out.println("\n\nAdded a total of " + myPlants.size() + " records from file.\n\n");
 
 		//TODO: Step 2 - create loop to read through whole file
 
@@ -27,9 +45,12 @@ public class Main
 
 
 		//TODO: Step 2 - close the input stream
-
+		inputFile.close();
 
 		//TODO: Step 3 - print contents of ArrayList
-
+		System.out.println("Plants in my collection:\n");
+		for(Plant p : myPlants) {
+			System.out.println(p + "\n");
+		}
 	}
 }
